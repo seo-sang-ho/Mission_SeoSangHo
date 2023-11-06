@@ -29,6 +29,16 @@ public class App {
                 System.out.println((Famous_Sayings.indexOf(famous_saying)+ 1) + "번 명언이 등록되었습니다.");
             }
 
+            if(command.equals("목록")){
+                System.out.println("번호 / 작가 / 명언");
+                System.out.println("-------------------");
+
+                for(int i = 0 ; i < Famous_Sayings.size(); i++){
+                    Famous_Saying famous_saying = Famous_Sayings.get(i);
+                    System.out.println((i+1) + "/" + famous_saying.getFamous_Saying() + "/" + famous_saying.getAuthor() );
+                }
+            }
+
             if(command.equals("종료")){
                 break;
             }
