@@ -35,9 +35,8 @@ public class App {
                 System.out.println("번호 / 작가 / 명언");
                 System.out.println("-------------------");
 
-                for(int i = 0 ; i < Famous_Sayings.size(); i++){
-                    Famous_Saying famous_saying = Famous_Sayings.get(i);
-                    System.out.println(famous_saying.getId() + "/" + famous_saying.getFamous_Saying() + "/" + famous_saying.getAuthor() );
+                for (Famous_Saying famous_saying : Famous_Sayings) {
+                    System.out.println(famous_saying.getId() + "/" + famous_saying.getFamous_Saying() + "/" + famous_saying.getAuthor());
                 }
             }
 
