@@ -67,6 +67,28 @@ public class App {
                 }
             }
 
+            if(command.equals("수정")){
+                System.out.println("수정할 명언의 번호) ");
+                int updateId = sc.nextInt();
+                sc.nextLine();
+
+                for(Famous_Saying famous_saying : Famous_Sayings){
+                    if(famous_saying.getId() == updateId){
+                        System.out.println("명언(기존) : " + famous_saying.getFamous_Saying());
+                        System.out.println("명언(수정) : ");
+                        String update_Famous_Saying = sc.nextLine();
+                        System.out.println("작가(기존) : " + famous_saying.getAuthor());
+                        System.out.println("작가(수정) : ");
+                        String update_Author = sc.nextLine();
+
+                        Famous_Saying update_Saying = new Famous_Saying(updateId,update_Famous_Saying,update_Author);
+                        Famous_Sayings.set(updateId-1,update_Saying);
+
+                        System.out.println(updateId + "번이 수정되었습니다.");
+                    }
+                }
+            }
+
             if(command.equals("종료")){
                 break;
             }
