@@ -1,5 +1,7 @@
 package com.ll;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -7,6 +9,7 @@ public class App {
     public static void run(){
 
         Scanner sc = new Scanner(System.in);
+        List<Famous_Saying> Famous_Sayings = new ArrayList<>();
 
         System.out.println("== 명언 앱 ==");
 
@@ -19,6 +22,11 @@ public class App {
                 String famous_Saying = sc.nextLine();
                 System.out.print("작가 : ");
                 String author = sc.nextLine();
+
+                Famous_Saying famous_saying = new Famous_Saying(famous_Saying,author);
+                Famous_Sayings.add(famous_saying);
+
+                System.out.println((Famous_Sayings.indexOf(famous_saying)+ 1) + "번 명언이 등록되었습니다.");
             }
 
             if(command.equals("종료")){
