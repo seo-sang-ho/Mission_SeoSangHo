@@ -1,6 +1,7 @@
 package com.ll;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -41,10 +42,29 @@ public class App {
             }
 
             if(command.equals("삭제")){
-                System.out.print("삭제할 명언의 번호) ");
-                int removeId = sc.nextInt();
-                Famous_Sayings.remove(removeId-1);
-                System.out.println(removeId + "번이 삭제되었습니다.");
+                try {
+                    System.out.print("삭제할 명언의 번호) ");
+                    int removeId = sc.nextInt();
+                    sc.nextLine(); // 버퍼 비우기
+
+                    List<Famous_Saying> remove_Famous_Sayings = new ArrayList<>();
+
+                    for (Famous_Saying famous_saying : Famous_Sayings) {
+                        if (famous_saying.getId() == removeId) {
+                            remove_Famous_Sayings.add(famous_saying);
+                        }
+                    }
+
+                    if (!remove_Famous_Sayings.isEmpty()) {
+                        Famous_Sayings.removeAll(remove_Famous_Sayings);
+                        System.out.println(removeId + "번이 삭제되었습니다.");
+                    } else {
+                        System.out.println(removeId + "번이 존재하지 않습니다.");
+                    }
+                }catch (InputMismatchException e){
+                    System.out.println("번호를 입력하세요");
+                    sc.nextLine();
+                }
             }
 
             if(command.equals("종료")){
