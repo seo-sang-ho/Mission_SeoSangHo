@@ -41,6 +41,13 @@ public class App {
                 }
             }
 
+            if(command.equals("삭제")){
+                System.out.print("삭제할 명언의 번호) ");
+                int removeId = sc.nextInt();
+                Famous_Sayings.remove(removeId-1);
+                System.out.println(removeId + "번이 삭제되었습니다.");
+            }
+
             if(command.equals("종료")){
                 break;
             }
