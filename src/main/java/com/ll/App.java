@@ -1,5 +1,6 @@
 package com.ll;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -12,6 +13,8 @@ public class App {
         Scanner sc = new Scanner(System.in);
         List<Famous_Saying> Famous_Sayings = new ArrayList<>();
         int index = 1;
+
+        getListFromFile(Famous_Sayings);
 
         System.out.println("== 명언 앱 ==");
 
@@ -29,11 +32,14 @@ public class App {
                 Famous_Sayings.add(famous_saying);
 
                 System.out.println(index + "번 명언이 등록되었습니다.");
+
+                documentation(famous_saying);
+
                 index++;
             }
 
             if(command.equals("목록")){
-                System.out.println("번호 / 작가 / 명언");
+                System.out.println("번호 / 명언 / 작가");
                 System.out.println("-------------------");
 
                 for (Famous_Saying famous_saying : Famous_Sayings) {
@@ -92,6 +98,35 @@ public class App {
             if(command.equals("종료")){
                 break;
             }
+        }
+    }
+
+    private static void getListFromFile(List<Famous_Saying> Famous_Sayings) {
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader("myFile.txt"));
+            String line;
+
+            while((line = reader.readLine()) != null){
+                String [] parts = line.split("/");
+                int id = Integer.parseInt(parts[0]);
+                String famous_Saying = parts[1];
+                String author = parts[2];
+
+                Famous_Sayings.add(new Famous_Saying(id,famous_Saying,author));
+            }
+            reader.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    private static void documentation(Famous_Saying famous_saying) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("myFile.txt",true));
+            writer.write(famous_saying.getId()+ "/" + famous_saying.getFamous_Saying() + "/" + famous_saying.getAuthor() + "\n");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
