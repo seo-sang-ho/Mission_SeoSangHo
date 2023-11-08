@@ -1,10 +1,9 @@
 package com.ll;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.*;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class App {
 
@@ -92,6 +91,29 @@ public class App {
 
                         System.out.println(updateId + "번이 수정되었습니다.");
                     }
+                }
+            }
+
+            if(command.equals("빌드")){
+                try{
+                    BufferedReader reader = new BufferedReader(new FileReader("myFile.txt"));
+                    String line;
+                    List<Map<String, String>> list = new ArrayList<>();
+
+                    while((line = reader.readLine()) != null){
+                        String[] parts = line.split("/");
+                        Map<String, String> map = new HashMap<>();
+                        map.put("id", parts[0]);
+                        map.put("content", parts[1]);
+                        map.put("author", parts[2]);
+                        list.add(map);
+                    }
+
+                    ObjectMapper mapper = new ObjectMapper();
+                    mapper.writeValue(new File("data.json"),list);
+                    reader.close();
+                }catch (IOException e){
+                    e.printStackTrace();
                 }
             }
 
